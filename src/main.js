@@ -144,6 +144,44 @@ function render() {
         <p class="countdown-note" data-countdown-note></p>
       </section>
 
+      <section class="paper-card section-reveal rsvp-section" aria-labelledby="rsvp-title">
+        <p class="section-kicker">Asistencia</p>
+        <h2 id="rsvp-title">Confirma tu asistencia</h2>
+        <form class="rsvp-form" data-rsvp-form>
+          <label>
+            Nombre
+            <input name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" required />
+          </label>
+
+          <fieldset>
+            <legend>¿Nos acompañas?</legend>
+            <label class="rsvp-choice">
+              <input type="radio" name="asistencia" value="Sí asistiré" checked required />
+              Sí asistiré
+            </label>
+            <label class="rsvp-choice">
+              <input type="radio" name="asistencia" value="No podré asistir" required />
+              No podré asistir
+            </label>
+          </fieldset>
+
+          <label>
+            Personas que asistirán
+            <input name="cantidad" type="number" min="0" max="10" value="1" inputmode="numeric" required />
+          </label>
+
+          <label>
+            Mensaje opcional
+            <textarea name="mensaje" rows="3" placeholder="Déjanos un mensaje"></textarea>
+          </label>
+
+          <button class="soft-button" type="submit" data-rsvp-submit>
+            Enviar confirmación
+          </button>
+          <p class="rsvp-status" data-rsvp-status role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
       <section class="section-reveal gallery-section" aria-labelledby="gallery-title">
         <p class="section-kicker">Galería</p>
         <h2 id="gallery-title">Recuerdos para compartir</h2>
@@ -341,6 +379,75 @@ function setupMusic() {
   });
 }
 
+function setupRsvp() {
+  const form = document.querySelector("[data-rsvp-form]");
+  const submit = document.querySelector("[data-rsvp-submit]");
+  const status = document.querySelector("[data-rsvp-status]");
+  const quantity = form?.elements.cantidad;
+
+  if (!form || !submit || !status || !quantity || !config.rsvp.endpoint) return;
+
+  function setStatus(message, state = "") {
+    status.textContent = message;
+    status.dataset.state = state;
+  }
+
+  function syncQuantity() {
+    const attendance = form.elements.asistencia.value;
+
+    if (attendance === "No podré asistir") {
+      quantity.value = "0";
+      quantity.disabled = true;
+      quantity.required = false;
+      return;
+    }
+
+    quantity.disabled = false;
+    quantity.required = true;
+    if (quantity.value === "0") quantity.value = "1";
+  }
+
+  form.addEventListener("change", syncQuantity);
+  syncQuantity();
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    syncQuantity();
+
+    const payload = {
+      nombre: form.elements.nombre.value.trim(),
+      asistencia: form.elements.asistencia.value,
+      cantidad: quantity.value,
+      mensaje: form.elements.mensaje.value.trim()
+    };
+
+    if (!payload.nombre) {
+      setStatus("Escribe tu nombre para confirmar.", "error");
+      form.elements.nombre.focus();
+      return;
+    }
+
+    submit.disabled = true;
+    setStatus("Enviando confirmación...", "pending");
+
+    try {
+      await fetch(config.rsvp.endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        body: new URLSearchParams(payload)
+      });
+
+      form.reset();
+      syncQuantity();
+      setStatus("Confirmación enviada. ¡Gracias!", "success");
+    } catch {
+      setStatus("No se pudo enviar. Intenta nuevamente.", "error");
+    } finally {
+      submit.disabled = false;
+    }
+  });
+}
+
 function setupGallery() {
   const modal = document.querySelector("[data-gallery-modal]");
   const image = document.querySelector("[data-modal-image]");
@@ -369,6 +476,7 @@ function init() {
   setupCountdown();
   setupCalendar();
   setupMusic();
+  setupRsvp();
   setupGallery();
 }
 

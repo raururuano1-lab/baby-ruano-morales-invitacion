@@ -23,6 +23,7 @@ Todo lo principal está en `src/config.js`:
 - código de vestimenta y paleta
 - muestra de cariño y enlaces opcionales
 - fotos de galería
+- enlace de Apps Script para confirmar asistencia
 - canción del botón flotante
 - colores principales
 
