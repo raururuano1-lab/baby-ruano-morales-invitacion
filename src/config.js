@@ -4,8 +4,7 @@ const heroBears = new URL(
   import.meta.url
 ).href;
 const galleryUltrasound = new URL("../assets/gallery/ecografia.svg", import.meta.url).href;
-const galleryMaternity = new URL("../assets/gallery/sesion-embarazo.svg", import.meta.url).href;
-const galleryFamily = new URL("../assets/gallery/familia.svg", import.meta.url).href;
+const galleryFamily = new URL("../assets/gallery/familia.jpeg", import.meta.url).href;
 const musicTrack = new URL("../assets/music/1-01 Dearly Beloved.mp3", import.meta.url).href;
 
 export const invitationConfig = {
@@ -89,16 +88,10 @@ export const invitationConfig = {
       alt: "Placeholder elegante para foto de ecografía"
     },
     {
-      title: "Sesión de embarazo",
-      description: "Un recuerdo de esta espera tan especial.",
-      src: galleryMaternity,
-      alt: "Placeholder elegante para sesión de embarazo"
-    },
-    {
       title: "Familia",
       description: "El amor que ya espera al bebé.",
       src: galleryFamily,
-      alt: "Placeholder elegante para foto familiar"
+      alt: "Fotografía de la familia"
     }
   ],
 
