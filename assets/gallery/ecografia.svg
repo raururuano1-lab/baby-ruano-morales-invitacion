@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-label="Placeholder acuarela para ecografía">
+  <defs>
+    <radialGradient id="paper" cx="50%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#fffdf8"/>
+      <stop offset="62%" stop-color="#faf5ec"/>
+      <stop offset="100%" stop-color="#e8d6bf"/>
+    </radialGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values=".1"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 .12"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="900" height="900" fill="url(#paper)"/>
+  <rect width="900" height="900" filter="url(#grain)" opacity=".45"/>
+  <circle cx="450" cy="430" r="248" fill="#6f4e37" opacity=".12"/>
+  <path d="M268 495c43-135 184-221 300-151 91 55 95 177 9 250-99 84-265 49-309-99z" fill="#f9efe1" stroke="#b59673" stroke-width="14" opacity=".9"/>
+  <path d="M392 418c55-62 169-16 173 69 4 76-72 128-143 104-79-26-90-105-30-173z" fill="#c8a982" opacity=".34"/>
+  <circle cx="474" cy="493" r="82" fill="#ffffff" opacity=".3"/>
+  <path d="M310 668c110 74 250 74 365 0" fill="none" stroke="#b59673" stroke-width="10" stroke-linecap="round" opacity=".45"/>
+  <path d="M276 246l22 53 57 5-44 37 13 56-48-30-49 30 13-56-44-37 57-5 23-53z" fill="#c8a982" opacity=".42"/>
+  <path d="M655 235c35 42 35 103 0 146 71-8 118-46 141-98-41 14-88 0-141-48z" fill="#e8d6bf" stroke="#b59673" stroke-width="8" opacity=".72"/>
+  <text x="450" y="772" text-anchor="middle" font-family="Georgia, serif" font-size="54" fill="#6f4e37" opacity=".72">Ecografía</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 560" role="img" aria-label="Globo beige de acuarela">
+  <ellipse cx="180" cy="172" rx="112" ry="142" fill="#e8d6bf" stroke="#b59673" stroke-width="10"/>
+  <path d="M221 70c35 29 52 80 44 132" fill="none" stroke="#ffffff" stroke-width="18" opacity=".48" stroke-linecap="round"/>
+  <path d="M180 316l-18 34h36z" fill="#b59673" opacity=".72"/>
+  <path d="M180 350c-29 45 30 73 0 118-17 25-54 22-68 61" fill="none" stroke="#6f4e37" stroke-width="8" opacity=".45" stroke-linecap="round"/>
+</svg>
