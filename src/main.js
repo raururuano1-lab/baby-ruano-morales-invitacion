@@ -119,7 +119,7 @@ function render() {
                   ${
                     gift.url
                       ? `<a class="text-link" href="${gift.url}" target="_blank" rel="noreferrer">Ver opción</a>`
-                      : `<span class="text-link disabled">Detalle disponible pronto</span>`
+                      : ""
                   }
                 </article>`
             )
