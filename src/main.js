@@ -1,4 +1,3 @@
-import "./styles.css";
 import { invitationConfig as config } from "./config.js";
 
 const app = document.querySelector("#app");
