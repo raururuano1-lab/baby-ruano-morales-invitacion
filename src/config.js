@@ -96,15 +96,6 @@ export const invitationConfig = {
     }
   ],
 
-  music: {
-    sectionTitle: "MÚSICA",
-    unavailableText: "La canción especial aún no está disponible.",
-
-    // Música: coloca un archivo en assets/music y cambia esta línea por:
-    // src: new URL("../assets/music/tu-cancion.mp3", import.meta.url).href
-    src: ""
-  },
-
   finalMessage: {
     lines: [
       "¡Será un día muy especial para nuestra familia!",

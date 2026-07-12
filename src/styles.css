@@ -453,8 +453,6 @@ svg {
 }
 
 .soft-button,
-.round-control,
-.floating-music,
 .modal-close {
   border: 0;
   cursor: pointer;
@@ -482,9 +480,7 @@ svg {
   font-weight: 700;
 }
 
-.soft-button:hover,
-.round-control:hover,
-.floating-music:hover {
+.soft-button:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
@@ -650,24 +646,6 @@ svg {
   font-size: 0.78rem;
 }
 
-.music-section {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.music-section .section-kicker {
-  margin-bottom: 6px;
-}
-
-.music-section p:last-child {
-  margin-bottom: 0;
-  font-size: 0.9rem;
-}
-
-.round-control,
-.floating-music,
 .modal-close {
   display: grid;
   flex: 0 0 52px;
@@ -677,18 +655,6 @@ svg {
   border-radius: 50%;
   background: var(--coffee-text);
   color: var(--white);
-}
-
-.floating-music {
-  position: fixed;
-  right: max(18px, calc((100vw - 430px) / 2 + 18px));
-  bottom: 18px;
-  z-index: 8;
-  box-shadow: var(--shadow);
-}
-
-.floating-music.is-playing {
-  background: var(--taupe);
 }
 
 .final-section {
@@ -750,10 +716,6 @@ svg {
   transform: translateY(0);
 }
 
-.shake {
-  animation: shake 0.38s ease;
-}
-
 @keyframes softRise {
   0%,
   100% {
@@ -793,19 +755,6 @@ svg {
   50% {
     opacity: 1;
     transform: scale(1.1);
-  }
-}
-
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-4px);
-  }
-  75% {
-    transform: translateX(4px);
   }
 }
 

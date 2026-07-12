@@ -16,9 +16,6 @@ const icons = {
     '<path d="M20 12v8H4v-8"/><path d="M2 8h20v4H2z"/><path d="M12 8v12"/><path d="M12 8H8.5A2.5 2.5 0 1 1 11 5.5L12 8z"/><path d="M12 8h3.5A2.5 2.5 0 1 0 13 5.5L12 8z"/>'
   ),
   moon: iconPath('<path d="M21 13.2A8.2 8.2 0 1 1 10.8 3a6.4 6.4 0 0 0 10.2 10.2z"/>'),
-  play: iconPath('<path d="M8 5v14l11-7z"/>'),
-  pause: iconPath('<path d="M8 5h3v14H8z"/><path d="M13 5h3v14h-3z"/>'),
-  music: iconPath('<path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>'),
   close: iconPath('<path d="M18 6 6 18"/><path d="M6 6l12 12"/>'),
   diaper: iconPath(
     '<path d="M4 7c4 4 12 4 16 0v6a8 8 0 0 1-16 0V7z"/><path d="M7 11l3 3"/><path d="M17 11l-3 3"/>'
@@ -40,7 +37,7 @@ function toKebabCase(value) {
 }
 
 function render() {
-  const { event, assets, dressCode, gifts, gallery, music, finalMessage } = config;
+  const { event, assets, dressCode, gifts, gallery, finalMessage } = config;
 
   app.innerHTML = `
     <main class="invite-shell" id="inicio">
@@ -145,17 +142,6 @@ function render() {
         <p class="countdown-note" data-countdown-note></p>
       </section>
 
-      <section class="paper-card section-reveal music-section" aria-label="Música">
-        <div>
-          <p class="section-kicker">${music.sectionTitle}</p>
-          <p data-music-status>${music.src ? "Presiona play para acompañar la invitación." : music.unavailableText}</p>
-        </div>
-        <button class="round-control" type="button" data-music-toggle aria-label="Reproducir música">
-          ${icons.play}
-        </button>
-        <audio preload="none" data-audio ${music.src ? `src="${music.src}"` : ""}></audio>
-      </section>
-
       <section class="section-reveal gallery-section" aria-labelledby="gallery-title">
         <p class="section-kicker">Galería</p>
         <h2 id="gallery-title">Recuerdos para compartir</h2>
@@ -181,10 +167,6 @@ function render() {
         </div>
       </section>
     </main>
-
-    <button class="floating-music" type="button" data-floating-music aria-label="Reproducir o pausar música">
-      ${icons.music}
-    </button>
 
     <dialog class="gallery-modal" data-gallery-modal>
       <button class="modal-close" type="button" data-modal-close aria-label="Cerrar imagen">
@@ -288,45 +270,6 @@ function escapeIcs(value) {
   return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
 }
 
-function setupMusic() {
-  const audio = document.querySelector("[data-audio]");
-  const toggle = document.querySelector("[data-music-toggle]");
-  const floating = document.querySelector("[data-floating-music]");
-  const status = document.querySelector("[data-music-status]");
-
-  function renderState(isPlaying) {
-    const label = isPlaying ? "Pausar música" : "Reproducir música";
-    toggle.innerHTML = isPlaying ? icons.pause : icons.play;
-    toggle.setAttribute("aria-label", label);
-    floating.classList.toggle("is-playing", isPlaying);
-  }
-
-  async function toggleMusic() {
-    if (!config.music.src) {
-      status.textContent = config.music.unavailableText;
-      toggle.classList.add("shake");
-      window.setTimeout(() => toggle.classList.remove("shake"), 450);
-      return;
-    }
-
-    try {
-      if (audio.paused) {
-        await audio.play();
-        renderState(true);
-      } else {
-        audio.pause();
-        renderState(false);
-      }
-    } catch {
-      status.textContent = "El navegador bloqueó el audio. Intenta presionar play nuevamente.";
-    }
-  }
-
-  toggle.addEventListener("click", toggleMusic);
-  floating.addEventListener("click", toggleMusic);
-  audio.addEventListener("ended", () => renderState(false));
-}
-
 function setupGallery() {
   const modal = document.querySelector("[data-gallery-modal]");
   const image = document.querySelector("[data-modal-image]");
@@ -354,7 +297,6 @@ function init() {
   setupRevealAnimations();
   setupCountdown();
   setupCalendar();
-  setupMusic();
   setupGallery();
 }
 
