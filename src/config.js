@@ -28,12 +28,12 @@ export const invitationConfig = {
     intro:
       "Como estamos felices de esperar a nuestro bebé, queremos que nos acompañes a conocer si será",
     highlight: "Niño o Niña",
-    dateLabel: "Domingo 03 Mayo",
+    dateLabel: "Sábado 05 Septiembre",
 
     // Fecha y hora para cuenta regresiva y calendario.
     // Formato recomendado: YYYY-MM-DDTHH:mm:ss-06:00 para Guatemala.
-    eventDateISO: "2026-05-03T14:00:00-06:00",
-    eventEndDateISO: "2026-05-03T18:00:00-06:00",
+    eventDateISO: "2026-09-05T14:00:00-06:00",
+    eventEndDateISO: "2026-09-05T18:00:00-06:00",
 
     // Hora visible en la invitación.
     timeLabel: "Hora: 14:00 hrs a 18:00 hrs",

@@ -27,7 +27,7 @@ Todo lo principal está en `src/config.js`:
 - canción del botón flotante
 - colores principales
 
-Nota: la fecha incluida es `2026-05-03T14:00:00-06:00`, que coincide con "Domingo 03 Mayo". Si el evento será en otra fecha, cambia también `eventEndDateISO`.
+Nota: la fecha incluida es `2026-09-05T14:00:00-06:00`, que coincide con "Sábado 05 Septiembre". Si el evento será en otra fecha, cambia también `eventEndDateISO`.
 
 ## Reemplazar imágenes
 
