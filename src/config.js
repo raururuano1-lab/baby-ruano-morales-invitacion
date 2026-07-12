@@ -4,7 +4,14 @@ const heroBears = new URL(
   import.meta.url
 ).href;
 const galleryUltrasound = new URL("../assets/gallery/ecografia.svg", import.meta.url).href;
-const galleryFamily = new URL("../assets/gallery/familia.jpeg", import.meta.url).href;
+const galleryFamily = [
+  new URL("../assets/gallery/familia 1.jpeg", import.meta.url).href,
+  new URL("../assets/gallery/familia 2.jpeg", import.meta.url).href,
+  new URL("../assets/gallery/familia 3.jpeg", import.meta.url).href,
+  new URL("../assets/gallery/familia 4.jpeg", import.meta.url).href,
+  new URL("../assets/gallery/familia 5.jpeg", import.meta.url).href,
+  new URL("../assets/gallery/familia 6.jpeg", import.meta.url).href
+];
 const musicTrack = new URL("../assets/music/1-01 Dearly Beloved.mp3", import.meta.url).href;
 
 export const invitationConfig = {
@@ -90,8 +97,12 @@ export const invitationConfig = {
     {
       title: "Familia",
       description: "El amor que ya espera al bebé.",
-      src: galleryFamily,
-      alt: "Fotografía de la familia"
+      src: galleryFamily[0],
+      alt: "Fotografía de la familia",
+      images: galleryFamily.map((src, index) => ({
+        src,
+        alt: `Fotografía familiar ${index + 1}`
+      }))
     }
   ],
 

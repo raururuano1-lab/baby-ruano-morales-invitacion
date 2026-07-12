@@ -33,7 +33,7 @@ Nota: la fecha incluida es `2026-09-05T14:00:00-06:00`, que coincide con "Sábad
 
 - Ositos/globos/nubes: `assets/images/watercolor-bears-balloons.png`
 - Decorativos sueltos: `assets/images/envelope.svg`, `cloud.svg`, `star.svg`, `balloon.svg`
-- Galería: `assets/gallery/ecografia.svg`, `assets/gallery/familia.jpeg`
+- Galería: `assets/gallery/ecografia.svg`, `assets/gallery/familia 1.jpeg` a `assets/gallery/familia 6.jpeg`
 - Música: `assets/music/1-01 Dearly Beloved.mp3`
 - Referencia visual: puedes guardarla en `assets/reference/`
 

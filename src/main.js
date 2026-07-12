@@ -18,6 +18,8 @@ const icons = {
   moon: iconPath('<path d="M21 13.2A8.2 8.2 0 1 1 10.8 3a6.4 6.4 0 0 0 10.2 10.2z"/>'),
   play: iconPath('<path d="M8 5v14l11-7z"/>'),
   pause: iconPath('<path d="M8 5h3v14H8z"/><path d="M13 5h3v14h-3z"/>'),
+  previous: iconPath('<path d="m15 18-6-6 6-6"/>'),
+  next: iconPath('<path d="m9 18 6-6-6-6"/>'),
   close: iconPath('<path d="M18 6 6 18"/><path d="M6 6l12 12"/>'),
   diaper: iconPath(
     '<path d="M4 7c4 4 12 4 16 0v6a8 8 0 0 1-16 0V7z"/><path d="M7 11l3 3"/><path d="M17 11l-3 3"/>'
@@ -218,6 +220,15 @@ function render() {
         ${icons.close}
       </button>
       <img data-modal-image alt="" />
+      <div class="gallery-carousel-controls" data-gallery-controls>
+        <button class="carousel-button" type="button" data-gallery-prev aria-label="Imagen anterior">
+          ${icons.previous}
+        </button>
+        <span data-gallery-counter></span>
+        <button class="carousel-button" type="button" data-gallery-next aria-label="Imagen siguiente">
+          ${icons.next}
+        </button>
+      </div>
       <h3 data-modal-title></h3>
     </dialog>
   `;
@@ -455,18 +466,46 @@ function setupGallery() {
   const modal = document.querySelector("[data-gallery-modal]");
   const image = document.querySelector("[data-modal-image]");
   const title = document.querySelector("[data-modal-title]");
+  const controls = document.querySelector("[data-gallery-controls]");
+  const counter = document.querySelector("[data-gallery-counter]");
+  const previous = document.querySelector("[data-gallery-prev]");
+  const next = document.querySelector("[data-gallery-next]");
+  let activeImages = [];
+  let activeIndex = 0;
+
+  function renderCarouselImage() {
+    const current = activeImages[activeIndex];
+
+    image.src = current.src;
+    image.alt = current.alt;
+    counter.textContent = `${activeIndex + 1} / ${activeImages.length}`;
+    controls.hidden = activeImages.length < 2;
+  }
+
+  function moveCarousel(direction) {
+    if (activeImages.length < 2) return;
+    activeIndex = (activeIndex + direction + activeImages.length) % activeImages.length;
+    renderCarouselImage();
+  }
 
   document.querySelectorAll("[data-gallery-index]").forEach((card) => {
     card.addEventListener("click", () => {
       const item = config.gallery[Number(card.dataset.galleryIndex)];
-      image.src = item.src;
-      image.alt = item.alt;
+      activeImages = item.images || [{ src: item.src, alt: item.alt }];
+      activeIndex = 0;
       title.textContent = item.title;
+      renderCarouselImage();
       modal.showModal();
     });
   });
 
+  previous.addEventListener("click", () => moveCarousel(-1));
+  next.addEventListener("click", () => moveCarousel(1));
   document.querySelector("[data-modal-close]").addEventListener("click", () => modal.close());
+  modal.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") moveCarousel(-1);
+    if (event.key === "ArrowRight") moveCarousel(1);
+  });
   modal.addEventListener("click", (event) => {
     if (event.target === modal) modal.close();
   });

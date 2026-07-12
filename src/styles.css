@@ -454,6 +454,7 @@ svg {
 
 .soft-button,
 .floating-music,
+.carousel-button,
 .modal-close {
   border: 0;
   cursor: pointer;
@@ -763,6 +764,7 @@ svg {
 }
 
 .floating-music,
+.carousel-button,
 .modal-close {
   display: grid;
   flex: 0 0 52px;
@@ -816,12 +818,39 @@ svg {
 
 .gallery-modal img {
   width: 100%;
+  max-height: 62svh;
   border-radius: 8px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.64);
 }
 
 .gallery-modal h3 {
   margin: 14px 0 0;
   text-align: center;
+}
+
+.gallery-carousel-controls {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.gallery-carousel-controls[hidden] {
+  display: none;
+}
+
+.gallery-carousel-controls span {
+  color: var(--taupe);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.carousel-button {
+  width: 42px;
+  height: 42px;
 }
 
 .modal-close {
