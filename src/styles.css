@@ -453,6 +453,7 @@ svg {
 }
 
 .soft-button,
+.floating-music,
 .modal-close {
   border: 0;
   cursor: pointer;
@@ -480,7 +481,8 @@ svg {
   font-weight: 700;
 }
 
-.soft-button:hover {
+.soft-button:hover,
+.floating-music:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
@@ -646,6 +648,7 @@ svg {
   font-size: 0.78rem;
 }
 
+.floating-music,
 .modal-close {
   display: grid;
   flex: 0 0 52px;
@@ -655,6 +658,18 @@ svg {
   border-radius: 50%;
   background: var(--coffee-text);
   color: var(--white);
+}
+
+.floating-music {
+  position: fixed;
+  right: max(18px, calc((100vw - 430px) / 2 + 18px));
+  bottom: 18px;
+  z-index: 8;
+  box-shadow: var(--shadow);
+}
+
+.floating-music.is-playing {
+  background: var(--taupe);
 }
 
 .final-section {

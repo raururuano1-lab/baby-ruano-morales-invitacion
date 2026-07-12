@@ -23,6 +23,7 @@ Todo lo principal está en `src/config.js`:
 - código de vestimenta y paleta
 - muestra de cariño y enlaces opcionales
 - fotos de galería
+- canción del botón flotante
 - colores principales
 
 Nota: la fecha incluida es `2026-05-03T14:00:00-06:00`, que coincide con "Domingo 03 Mayo". Si el evento será en otra fecha, cambia también `eventEndDateISO`.
@@ -32,6 +33,7 @@ Nota: la fecha incluida es `2026-05-03T14:00:00-06:00`, que coincide con "Doming
 - Ositos/globos/nubes: `assets/images/watercolor-bears-balloons.png`
 - Decorativos sueltos: `assets/images/envelope.svg`, `cloud.svg`, `star.svg`, `balloon.svg`
 - Galería: `assets/gallery/ecografia.svg`, `assets/gallery/sesion-embarazo.svg`, `assets/gallery/familia.svg`
+- Música: `assets/music/1-01 Dearly Beloved.mp3`
 - Referencia visual: puedes guardarla en `assets/reference/`
 
 Si reemplazas archivos manteniendo el mismo nombre, no necesitas cambiar el código. Si cambias nombres, actualiza los `new URL(...)` al inicio de `src/config.js`.

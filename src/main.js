@@ -16,6 +16,8 @@ const icons = {
     '<path d="M20 12v8H4v-8"/><path d="M2 8h20v4H2z"/><path d="M12 8v12"/><path d="M12 8H8.5A2.5 2.5 0 1 1 11 5.5L12 8z"/><path d="M12 8h3.5A2.5 2.5 0 1 0 13 5.5L12 8z"/>'
   ),
   moon: iconPath('<path d="M21 13.2A8.2 8.2 0 1 1 10.8 3a6.4 6.4 0 0 0 10.2 10.2z"/>'),
+  play: iconPath('<path d="M8 5v14l11-7z"/>'),
+  pause: iconPath('<path d="M8 5h3v14H8z"/><path d="M13 5h3v14h-3z"/>'),
   close: iconPath('<path d="M18 6 6 18"/><path d="M6 6l12 12"/>'),
   diaper: iconPath(
     '<path d="M4 7c4 4 12 4 16 0v6a8 8 0 0 1-16 0V7z"/><path d="M7 11l3 3"/><path d="M17 11l-3 3"/>'
@@ -168,6 +170,11 @@ function render() {
       </section>
     </main>
 
+    <button class="floating-music" type="button" data-floating-music aria-label="Reproducir musica">
+      ${icons.play}
+    </button>
+    <audio preload="none" data-audio src="${config.music.src}"></audio>
+
     <dialog class="gallery-modal" data-gallery-modal>
       <button class="modal-close" type="button" data-modal-close aria-label="Cerrar imagen">
         ${icons.close}
@@ -270,6 +277,39 @@ function escapeIcs(value) {
   return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
 }
 
+function setupMusic() {
+  const audio = document.querySelector("[data-audio]");
+  const toggle = document.querySelector("[data-floating-music]");
+
+  if (!audio || !toggle || !config.music.src) {
+    toggle?.remove();
+    audio?.remove();
+    return;
+  }
+
+  function renderState(isPlaying) {
+    toggle.innerHTML = isPlaying ? icons.pause : icons.play;
+    toggle.classList.toggle("is-playing", isPlaying);
+    toggle.setAttribute("aria-label", isPlaying ? "Pausar musica" : "Reproducir musica");
+  }
+
+  toggle.addEventListener("click", async () => {
+    try {
+      if (audio.paused) {
+        await audio.play();
+        renderState(true);
+      } else {
+        audio.pause();
+        renderState(false);
+      }
+    } catch {
+      renderState(false);
+    }
+  });
+
+  audio.addEventListener("ended", () => renderState(false));
+}
+
 function setupGallery() {
   const modal = document.querySelector("[data-gallery-modal]");
   const image = document.querySelector("[data-modal-image]");
@@ -297,6 +337,7 @@ function init() {
   setupRevealAnimations();
   setupCountdown();
   setupCalendar();
+  setupMusic();
   setupGallery();
 }
 
