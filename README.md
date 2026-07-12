@@ -1,6 +1,6 @@
 # Invitación Familia Ruano Morales
 
-Invitación digital mobile-first para Gender Reveal / Baby Shower creada con HTML, CSS y JavaScript puro sobre Vite.
+Invitación digital mobile-first para Gender Reveal creada con HTML, CSS y JavaScript puro sobre Vite.
 
 ## Correr el proyecto
 

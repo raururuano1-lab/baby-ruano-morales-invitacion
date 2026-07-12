@@ -23,7 +23,7 @@ export const invitationConfig = {
   event: {
     // Título principal editable.
     title: "Familia Ruano Morales",
-    coverTitle: "Baby Shower & Gender Reveal",
+    coverTitle: "Gender Reveal",
     coverSubtitle: "Un pequeño secreto está por revelarse",
     intro:
       "Como estamos felices de esperar a nuestro bebé, queremos que nos acompañes a conocer si será",

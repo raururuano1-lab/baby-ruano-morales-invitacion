@@ -173,7 +173,7 @@ function render() {
     <button class="floating-music" type="button" data-floating-music aria-label="Reproducir musica">
       ${icons.play}
     </button>
-    <audio preload="none" data-audio src="${config.music.src}"></audio>
+    <audio preload="auto" autoplay data-audio src="${config.music.src}"></audio>
 
     <dialog class="gallery-modal" data-gallery-modal>
       <button class="modal-close" type="button" data-modal-close aria-label="Cerrar imagen">
@@ -293,21 +293,52 @@ function setupMusic() {
     toggle.setAttribute("aria-label", isPlaying ? "Pausar musica" : "Reproducir musica");
   }
 
-  toggle.addEventListener("click", async () => {
+  async function startMusic() {
     try {
-      if (audio.paused) {
-        await audio.play();
-        renderState(true);
-      } else {
-        audio.pause();
-        renderState(false);
-      }
+      await audio.play();
+      renderState(true);
+      removeStartListeners();
+      return true;
     } catch {
       renderState(false);
+      return false;
+    }
+  }
+
+  function pauseMusic() {
+    audio.pause();
+    renderState(false);
+  }
+
+  function startOnFirstInteraction(event) {
+    if (event.target instanceof Element && event.target.closest("[data-floating-music]")) return;
+    startMusic();
+  }
+
+  function addStartListeners() {
+    document.addEventListener("pointerdown", startOnFirstInteraction, { once: true });
+    document.addEventListener("keydown", startOnFirstInteraction, { once: true });
+  }
+
+  function removeStartListeners() {
+    document.removeEventListener("pointerdown", startOnFirstInteraction);
+    document.removeEventListener("keydown", startOnFirstInteraction);
+  }
+
+  toggle.addEventListener("click", () => {
+    if (audio.paused) {
+      startMusic();
+    } else {
+      pauseMusic();
     }
   });
 
+  audio.addEventListener("play", () => renderState(true));
+  audio.addEventListener("pause", () => renderState(false));
   audio.addEventListener("ended", () => renderState(false));
+  startMusic().then((started) => {
+    if (!started) addStartListeners();
+  });
 }
 
 function setupGallery() {
