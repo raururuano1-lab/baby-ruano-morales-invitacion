@@ -87,6 +87,10 @@ export const invitationConfig = {
       "https://script.google.com/macros/s/AKfycbxRmx8mgTIAfDGrKdhTa3DL1R0mHUu7AUHV6rgiwfqI3Vyc01RzfIp5FTj8cM_qBhYD/exec"
   },
 
+  prediction: {
+    storageKey: "baby-ruano-morales-prediction"
+  },
+
   gallery: [
     {
       title: "Ecografía",

@@ -146,6 +146,33 @@ function render() {
         <p class="countdown-note" data-countdown-note></p>
       </section>
 
+      <section class="paper-card section-reveal prediction-section" aria-labelledby="prediction-title">
+        <p class="section-kicker">Predicción</p>
+        <h2 id="prediction-title">¿Cuál es tu predicción?</h2>
+        <p class="prediction-copy">Selecciona si crees que será nene o nena.</p>
+        <img class="prediction-art" src="${assets.heroBears}" alt="Ositos de acuarela para la predicción" />
+
+        <div class="prediction-actions" role="group" aria-label="Predicción del bebé">
+          <button class="prediction-button" type="button" data-prediction-vote="nene">Nene</button>
+          <button class="prediction-button" type="button" data-prediction-vote="nena">Nena</button>
+        </div>
+
+        <div class="prediction-results" aria-live="polite">
+          <h3>Resultados</h3>
+          <div class="prediction-result-grid">
+            <div class="prediction-result prediction-result-nene">
+              <strong data-prediction-percent="nene">0%</strong>
+              <span>Nene</span>
+            </div>
+            <div class="prediction-result prediction-result-nena">
+              <strong data-prediction-percent="nena">0%</strong>
+              <span>Nena</span>
+            </div>
+          </div>
+          <p class="prediction-status" data-prediction-status>Calculando resultados...</p>
+        </div>
+      </section>
+
       <section class="paper-card section-reveal rsvp-section" aria-labelledby="rsvp-title">
         <p class="section-kicker">Asistencia</p>
         <h2 id="rsvp-title">Confirma tu asistencia</h2>
@@ -390,6 +417,135 @@ function setupMusic() {
   });
 }
 
+function setupPrediction() {
+  const buttons = document.querySelectorAll("[data-prediction-vote]");
+  const status = document.querySelector("[data-prediction-status]");
+  const nenePercent = document.querySelector('[data-prediction-percent="nene"]');
+  const nenaPercent = document.querySelector('[data-prediction-percent="nena"]');
+
+  if (!buttons.length || !status || !nenePercent || !nenaPercent || !config.rsvp.endpoint) return;
+
+  const savedVote = localStorage.getItem(config.prediction.storageKey);
+
+  function formatPrediction(value) {
+    return value === "nena" ? "Nena" : "Nene";
+  }
+
+  function setStatus(message, state = "") {
+    status.textContent = message;
+    status.dataset.state = state;
+  }
+
+  function renderVoteState(vote) {
+    buttons.forEach((button) => {
+      const isSelected = button.dataset.predictionVote === vote;
+      button.classList.toggle("is-selected", isSelected);
+      button.disabled = Boolean(vote);
+    });
+
+    if (vote) setStatus(`Tu predicción: ${formatPrediction(vote)}`, "success");
+  }
+
+  function renderResults(results) {
+    const total = Number(results.total || 0);
+    const nene = Number(results.nenePercent || 0);
+    const nena = Number(results.nenaPercent || 0);
+
+    nenePercent.textContent = `${nene}%`;
+    nenaPercent.textContent = `${nena}%`;
+
+    if (!localStorage.getItem(config.prediction.storageKey)) {
+      setStatus(total ? `${total} voto${total === 1 ? "" : "s"} registrados` : "Aún no hay votos");
+    }
+  }
+
+  async function loadResults() {
+    try {
+      const results = await fetchPredictionResults();
+      renderResults(results);
+    } catch {
+      setStatus("Resultados no disponibles por ahora.", "error");
+    }
+  }
+
+  async function submitVote(vote) {
+    if (localStorage.getItem(config.prediction.storageKey)) return;
+
+    buttons.forEach((button) => {
+      button.disabled = true;
+    });
+    setStatus("Guardando tu predicción...", "pending");
+
+    try {
+      await fetch(config.rsvp.endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+          tipo: "prediccion",
+          prediccion: vote
+        })
+      });
+
+      localStorage.setItem(config.prediction.storageKey, vote);
+      renderVoteState(vote);
+      await wait(700);
+      await loadResults();
+    } catch {
+      setStatus("No se pudo guardar. Intenta nuevamente.", "error");
+      buttons.forEach((button) => {
+        button.disabled = false;
+      });
+    }
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => submitVote(button.dataset.predictionVote));
+  });
+
+  if (savedVote) renderVoteState(savedVote);
+  loadResults();
+}
+
+function fetchPredictionResults() {
+  return new Promise((resolve, reject) => {
+    const callbackName = `predictionResults_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const script = document.createElement("script");
+    const separator = config.rsvp.endpoint.includes("?") ? "&" : "?";
+    const timeout = window.setTimeout(() => {
+      cleanup();
+      reject(new Error("Prediction results timeout"));
+    }, 10000);
+
+    function cleanup() {
+      window.clearTimeout(timeout);
+      script.remove();
+      delete window[callbackName];
+    }
+
+    window[callbackName] = (data) => {
+      cleanup();
+      resolve(data || {});
+    };
+
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("Prediction results failed"));
+    };
+
+    script.src = `${config.rsvp.endpoint}${separator}action=predicciones&callback=${callbackName}`;
+    document.body.appendChild(script);
+  });
+}
+
+function wait(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
 function setupRsvp() {
   const form = document.querySelector("[data-rsvp-form]");
   const submit = document.querySelector("[data-rsvp-submit]");
@@ -518,6 +674,7 @@ function init() {
   setupCountdown();
   setupCalendar();
   setupMusic();
+  setupPrediction();
   setupRsvp();
   setupGallery();
 }
