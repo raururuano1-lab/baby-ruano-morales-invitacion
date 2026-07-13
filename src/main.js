@@ -149,29 +149,29 @@ function render() {
       <section class="paper-card section-reveal prediction-section" aria-labelledby="prediction-title">
         <p class="section-kicker">Predicción</p>
         <h2 id="prediction-title">¿Cuál es tu predicción?</h2>
-        <p class="prediction-copy">Selecciona si crees que será niño o niña.</p>
+        <p class="prediction-copy">Selecciona si crees que será niña o niño.</p>
 
         <div class="prediction-actions" role="group" aria-label="Predicción del bebé">
-          <button class="prediction-button" type="button" data-prediction-vote="nene">
-            <img class="prediction-option-image" src="${config.prediction.boyImage}" alt="Osito para predicción de niño" />
-            <span>Niño</span>
-          </button>
           <button class="prediction-button" type="button" data-prediction-vote="nena">
             <img class="prediction-option-image" src="${config.prediction.girlImage}" alt="Osita para predicción de niña" />
             <span>Niña</span>
+          </button>
+          <button class="prediction-button" type="button" data-prediction-vote="nene">
+            <img class="prediction-option-image" src="${config.prediction.boyImage}" alt="Osito para predicción de niño" />
+            <span>Niño</span>
           </button>
         </div>
 
         <div class="prediction-results" aria-live="polite">
           <h3>Resultados</h3>
           <div class="prediction-result-grid">
-            <div class="prediction-result prediction-result-nene">
-              <strong data-prediction-percent="nene">0%</strong>
-              <span>Niño</span>
-            </div>
             <div class="prediction-result prediction-result-nena">
               <strong data-prediction-percent="nena">0%</strong>
               <span>Niña</span>
+            </div>
+            <div class="prediction-result prediction-result-nene">
+              <strong data-prediction-percent="nene">0%</strong>
+              <span>Niño</span>
             </div>
           </div>
           <p class="prediction-status" data-prediction-status>Calculando resultados...</p>
