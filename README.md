@@ -24,7 +24,7 @@ Todo lo principal está en `src/config.js`:
 - muestra de cariño y enlaces opcionales
 - fotos de galería
 - enlace de Apps Script para confirmar asistencia
-- predicción Nene/Nena y resultados
+- predicción Niño/Niña y resultados
 - canción del botón flotante
 - colores principales
 

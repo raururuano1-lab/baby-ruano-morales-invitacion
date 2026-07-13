@@ -12,6 +12,14 @@ const galleryFamily = [
   new URL("../assets/gallery/familia 5.jpeg", import.meta.url).href,
   new URL("../assets/gallery/familia 6.jpeg", import.meta.url).href
 ];
+const predictionGirl = new URL(
+  "../assets/images/ChatGPT Image 13 jul 2026, 01_07_52.png",
+  import.meta.url
+).href;
+const predictionBoy = new URL(
+  "../assets/images/ChatGPT Image 13 jul 2026, 01_08_15.png",
+  import.meta.url
+).href;
 const musicTrack = new URL("../assets/music/1-01 Dearly Beloved.mp3", import.meta.url).href;
 
 export const invitationConfig = {
@@ -88,7 +96,9 @@ export const invitationConfig = {
   },
 
   prediction: {
-    storageKey: "baby-ruano-morales-prediction"
+    storageKey: "baby-ruano-morales-prediction",
+    boyImage: predictionBoy,
+    girlImage: predictionGirl
   },
 
   gallery: [
