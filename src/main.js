@@ -83,7 +83,7 @@ function render() {
             ${icons.map}
             Google Maps
           </a>
-          <a class="soft-button" href="${event.wazeUrl}">
+          <a class="soft-button" href="${event.wazeUrl}" data-waze-link>
             ${icons.car}
             Waze
           </a>
@@ -325,6 +325,46 @@ function setupCalendar() {
     link.download = "baby-ruano-morales.ics";
     link.click();
     URL.revokeObjectURL(url);
+  });
+}
+
+function setupWazeLink() {
+  const link = document.querySelector("[data-waze-link]");
+
+  if (!link || !config.event.wazeWebUrl) return;
+
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    let openedApp = false;
+    let fallbackTimer;
+
+    function cleanup() {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pagehide", markAppOpened);
+      window.clearTimeout(fallbackTimer);
+    }
+
+    function markAppOpened() {
+      openedApp = true;
+      cleanup();
+    }
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "hidden") markAppOpened();
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pagehide", markAppOpened, { once: true });
+
+    window.location.href = config.event.wazeUrl;
+
+    fallbackTimer = window.setTimeout(() => {
+      if (!openedApp && document.visibilityState !== "hidden") {
+        cleanup();
+        window.location.href = config.event.wazeWebUrl;
+      }
+    }, 3500);
   });
 }
 
@@ -678,6 +718,7 @@ function init() {
   setupRevealAnimations();
   setupCountdown();
   setupCalendar();
+  setupWazeLink();
   setupMusic();
   setupPrediction();
   setupRsvp();

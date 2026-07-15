@@ -58,7 +58,9 @@ export const invitationConfig = {
     // Cambia estos enlaces por tus links reales de Google Maps y Waze.
     googleMapsUrl:
       "https://www.google.com/maps/place/Framig/@14.6447208,-90.5150638,20z/data=!4m6!3m5!1s0x8589a21041612851:0xa3e3a7a6dfec3351!8m2!3d14.6447548!4d-90.5149382!16s%2Fg%2F11c1tcx11g?entry=ttu&g_ep=EgoyMDI2MDcxMi4wIKXMDSoASAFQAw%3D%3D",
-    wazeUrl: "https://waze.com/ul/h9fxek3cp4"
+    wazeUrl: "waze://?ll=14.6447548,-90.5149382&navigate=yes",
+    wazeWebUrl:
+      "https://waze.com/ul?ll=14.6447548,-90.5149382&navigate=yes&utm_source=baby_ruano_morales"
   },
 
   dressCode: {
