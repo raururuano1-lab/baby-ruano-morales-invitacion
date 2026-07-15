@@ -83,7 +83,7 @@ function render() {
             ${icons.map}
             Google Maps
           </a>
-          <a class="soft-button" href="${event.wazeUrl}" target="_blank" rel="noreferrer">
+          <a class="soft-button" href="${event.wazeUrl}">
             ${icons.car}
             Waze
           </a>
