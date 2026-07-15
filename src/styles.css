@@ -64,10 +64,6 @@ img {
   max-width: 100%;
 }
 
-body.is-locked {
-  overflow: hidden;
-}
-
 .invite-shell {
   position: relative;
   width: min(100%, 430px);
@@ -89,157 +85,6 @@ body.is-locked {
     radial-gradient(circle at 12% 12%, rgba(255, 255, 255, 0.84), transparent 18%),
     radial-gradient(circle at 88% 18%, rgba(232, 214, 191, 0.52), transparent 20%),
     radial-gradient(circle at 16% 86%, rgba(181, 150, 115, 0.16), transparent 22%);
-}
-
-.opening-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: grid;
-  place-items: center;
-  padding: 26px;
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.92), transparent 48%),
-    var(--cream);
-  transition:
-    opacity 0.6s ease,
-    visibility 0.6s ease;
-}
-
-.opening-screen.is-open {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.opening-stars span {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  color: var(--medium-beige);
-  background: currentColor;
-  clip-path: polygon(50% 0, 62% 34%, 98% 35%, 68% 56%, 80% 91%, 50% 70%, 20% 91%, 32% 56%, 2% 35%, 38% 34%);
-  animation: twinkle 2.8s ease-in-out infinite;
-}
-
-.opening-stars span:nth-child(1) {
-  top: 18%;
-  left: 22%;
-}
-
-.opening-stars span:nth-child(2) {
-  top: 28%;
-  right: 18%;
-  animation-delay: 0.4s;
-}
-
-.opening-stars span:nth-child(3) {
-  right: 30%;
-  bottom: 22%;
-  animation-delay: 0.8s;
-}
-
-.opening-stars span:nth-child(4) {
-  bottom: 30%;
-  left: 14%;
-  animation-delay: 1.2s;
-}
-
-.opening-stars span:nth-child(5) {
-  top: 46%;
-  left: 50%;
-  animation-delay: 1.6s;
-}
-
-.envelope {
-  position: relative;
-  width: min(74vw, 280px);
-  height: 188px;
-  perspective: 800px;
-  filter: drop-shadow(0 20px 24px rgba(111, 78, 55, 0.14));
-}
-
-.envelope-back,
-.envelope-front,
-.envelope-flap,
-.envelope-letter,
-.envelope-seal {
-  position: absolute;
-}
-
-.envelope-back {
-  inset: 34px 0 0;
-  border: 1px solid rgba(111, 78, 55, 0.14);
-  border-radius: 8px;
-  background: linear-gradient(145deg, var(--white), var(--light-beige));
-}
-
-.envelope-letter {
-  right: 18px;
-  bottom: 46px;
-  left: 18px;
-  display: grid;
-  height: 108px;
-  place-items: center;
-  border: 1px solid rgba(111, 78, 55, 0.12);
-  border-radius: 8px;
-  background: var(--white);
-  color: var(--coffee-text);
-  font-family: var(--serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  text-align: center;
-  transform: translateY(42px);
-  transition: transform 0.8s 0.2s ease;
-}
-
-.opening-screen.is-open .envelope-letter {
-  transform: translateY(-58px);
-}
-
-.envelope-front {
-  inset: 76px 0 0;
-  border-radius: 0 0 8px 8px;
-  background:
-    linear-gradient(36deg, transparent 49%, rgba(255, 255, 255, 0.64) 50%, transparent 51%),
-    linear-gradient(-36deg, transparent 49%, rgba(255, 255, 255, 0.64) 50%, transparent 51%),
-    var(--light-beige);
-}
-
-.envelope-flap {
-  top: 34px;
-  left: 0;
-  width: 100%;
-  height: 102px;
-  transform-origin: top;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: linear-gradient(180deg, #f7ede0, var(--medium-beige));
-  transition: transform 0.8s ease;
-}
-
-.opening-screen.is-open .envelope-flap {
-  transform: rotateX(180deg);
-}
-
-.envelope-seal {
-  top: 102px;
-  left: 50%;
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--white);
-  color: var(--taupe);
-  transform: translateX(-50%);
-}
-
-.envelope-seal svg {
-  width: 21px;
-}
-
-.opening-button {
-  align-self: end;
-  margin-bottom: min(16vh, 100px);
 }
 
 .cover-section {
@@ -503,25 +348,6 @@ svg {
   margin: 20px auto 0;
 }
 
-.swatch {
-  display: grid;
-  gap: 6px;
-  justify-items: center;
-  min-width: 0;
-}
-
-.swatch span {
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(111, 78, 55, 0.15);
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.34);
-}
-
-.swatch small {
-  font-size: 0.68rem;
-}
-
 .swatch-dot {
   display: block;
   width: 42px;
@@ -568,11 +394,6 @@ svg {
   color: var(--coffee-text);
   font-size: 0.85rem;
   font-weight: 800;
-}
-
-.text-link.disabled {
-  color: var(--taupe);
-  text-decoration: none;
 }
 
 .countdown-section {

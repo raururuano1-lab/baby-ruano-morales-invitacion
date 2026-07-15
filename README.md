@@ -1,47 +1,56 @@
-# Invitación Familia Ruano Morales
+# Invitacion Familia Ruano Morales
 
-Invitación digital mobile-first para Gender Reveal creada con HTML, CSS y JavaScript puro sobre Vite.
+Invitacion digital mobile-first para el Gender Reveal de la Familia Ruano Morales. El proyecto usa Vite con HTML, CSS y JavaScript puro.
 
-## Correr el proyecto
+## Requisitos
 
-Necesitas Node.js instalado. Esta plantilla usa Vite 8, así que usa Node.js 20.19+ o 22.12+.
+- Node.js 20.19+ o 22.12+
+- npm
+
+## Instalacion
 
 ```bash
 npm install
+```
+
+## Desarrollo local
+
+```bash
 npm run dev
 ```
 
-Luego abre la URL que muestre la terminal, normalmente `http://localhost:5173`.
+Abre la URL que muestre la terminal, normalmente `http://localhost:5173`.
 
 ## Editar datos
 
-Todo lo principal está en `src/config.js`:
+La configuracion principal esta en `src/config.js`:
 
-- título, nombres, textos y mensaje final
-- fecha/hora visible y `eventDateISO` para cuenta regresiva/calendario
-- dirección, Google Maps y Waze
-- código de vestimenta y paleta
-- muestra de cariño y enlaces opcionales
-- fotos de galería
-- enlace de Apps Script para confirmar asistencia
-- predicción Niño/Niña y resultados
-- canción del botón flotante
-- colores principales
+- textos, nombres y mensaje final
+- fecha, hora, cuenta regresiva y archivo de calendario
+- direccion, Google Maps y Waze
+- codigo de vestimenta y paleta de colores
+- regalos sugeridos
+- asistencia y endpoint de Apps Script
+- prediccion Nino/Nina y resultados
+- galeria, musica e imagenes principales
 
-Nota: la fecha incluida es `2026-09-19T14:00:00-06:00`, que coincide con "Sábado 19 Septiembre". Si el evento será en otra fecha, cambia también `eventEndDateISO`.
+## Reemplazar assets
 
-## Reemplazar imágenes
+- Imagen principal: `assets/images/watercolor-bears-balloons.png`
+- Prediccion: `assets/images/ChatGPT Image 13 jul 2026, 01_07_52.png` y `assets/images/ChatGPT Image 13 jul 2026, 01_08_15.png`
+- Galeria: `assets/gallery/ecografia.svg` y `assets/gallery/familia 1.jpeg` a `assets/gallery/familia 6.jpeg`
+- Musica: `assets/music/1-01 Dearly Beloved.mp3`
 
-- Ositos/globos/nubes: `assets/images/watercolor-bears-balloons.png`
-- Decorativos sueltos: `assets/images/envelope.svg`, `cloud.svg`, `star.svg`, `balloon.svg`
-- Galería: `assets/gallery/ecografia.svg`, `assets/gallery/familia 1.jpeg` a `assets/gallery/familia 6.jpeg`
-- Música: `assets/music/1-01 Dearly Beloved.mp3`
-- Referencia visual: puedes guardarla en `assets/reference/`
+Si cambias nombres de archivos, actualiza los `new URL(...)` al inicio de `src/config.js`.
 
-Si reemplazas archivos manteniendo el mismo nombre, no necesitas cambiar el código. Si cambias nombres, actualiza los `new URL(...)` al inicio de `src/config.js`.
+## Build
 
-## Publicar
+```bash
+npm run build
+```
 
-1. Ejecuta `npm run build`.
-2. Sube la carpeta `dist/` a Netlify, Vercel o GitHub Pages.
-3. Para GitHub Pages, `vite.config.js` ya usa `base: "./"` para que los assets funcionen en subcarpetas.
+El build se genera en `dist/`.
+
+## Publicacion
+
+El proyecto puede publicarse en GitHub Pages, Netlify o Vercel. Para GitHub Pages, `vite.config.js` usa `base: "./"` para que los assets funcionen correctamente dentro de una subcarpeta del dominio.
