@@ -37,7 +37,7 @@ La configuracion principal esta en `src/config.js`:
 ## Reemplazar assets
 
 - Imagen principal: `assets/images/watercolor-bears-balloons.png`
-- Prediccion: `assets/images/ChatGPT Image 13 jul 2026, 01_07_52.png` y `assets/images/ChatGPT Image 13 jul 2026, 01_08_15.png`
+- Prediccion: `assets/images/prediction-girl-clean.png` y `assets/images/prediction-boy-clean.png`
 - Galeria: `assets/gallery/ecografia.svg` y `assets/gallery/familia 1.jpeg` a `assets/gallery/familia 6.jpeg`
 - Musica: `assets/music/1-01 Dearly Beloved.mp3`
 

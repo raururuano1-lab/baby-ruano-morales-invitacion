@@ -13,11 +13,11 @@ const galleryFamily = [
   new URL("../assets/gallery/familia 6.jpeg", import.meta.url).href
 ];
 const predictionGirl = new URL(
-  "../assets/images/ChatGPT Image 13 jul 2026, 01_07_52.png",
+  "../assets/images/prediction-girl-clean.png",
   import.meta.url
 ).href;
 const predictionBoy = new URL(
-  "../assets/images/ChatGPT Image 13 jul 2026, 01_08_15.png",
+  "../assets/images/prediction-boy-clean.png",
   import.meta.url
 ).href;
 const musicTrack = new URL("../assets/music/1-01 Dearly Beloved.mp3", import.meta.url).href;
@@ -26,12 +26,16 @@ export const invitationConfig = {
   // Colores principales del sitio.
   colors: {
     white: "#FFFFFF",
-    cream: "#F8F3EB",
-    lightBeige: "#E8D8C3",
-    mediumBeige: "#D5B38A",
-    coffeeLight: "#B88E63",
-    coffeeText: "#6F4E37",
-    taupe: "#B88E63"
+    cream: "#FAF6EF",
+    ivory: "#F8F3EB",
+    lightBeige: "#E9D7BF",
+    mediumBeige: "#D8BE98",
+    taupe: "#B59673",
+    coffeeLight: "#B7875C",
+    coffeeText: "#6E4D36",
+    softGold: "#D6B98C",
+    pastelBlue: "#C7E4F8",
+    pastelPink: "#F8D5DD"
   },
 
   event: {
@@ -129,7 +133,9 @@ export const invitationConfig = {
   },
 
   music: {
-    src: musicTrack
+    src: musicTrack,
+    title: "1-01 Dearly Beloved",
+    unavailableMessage: "La canción especial aún no está disponible."
   },
 
   assets: {

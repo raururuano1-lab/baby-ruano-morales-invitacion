@@ -41,7 +41,7 @@ function toKebabCase(value) {
 }
 
 function render() {
-  const { event, assets, dressCode, gifts, gallery, finalMessage } = config;
+  const { event, assets, dressCode, gifts, gallery, finalMessage, music } = config;
 
   app.innerHTML = `
     <main class="invite-shell" id="inicio">
@@ -146,6 +146,18 @@ function render() {
         <p class="countdown-note" data-countdown-note></p>
       </section>
 
+      <section class="paper-card section-reveal music-card" aria-labelledby="music-title">
+        <div>
+          <p class="section-kicker">MÚSICA</p>
+          <p id="music-title" class="music-track">
+            ${music.src ? music.title || "Música de fondo" : music.unavailableMessage}
+          </p>
+        </div>
+        <button class="music-inline-button" type="button" data-music-toggle aria-label="Reproducir música">
+          ${icons.play}
+        </button>
+      </section>
+
       <section class="paper-card section-reveal prediction-section" aria-labelledby="prediction-title">
         <p class="section-kicker">Predicción</p>
         <h2 id="prediction-title">¿Cuál es tu predicción?</h2>
@@ -237,12 +249,13 @@ function render() {
 
       <section class="final-section section-reveal">
         <div class="paper-card final-card">
+          <img class="final-illustration" src="${assets.heroBears}" alt="" aria-hidden="true" />
           ${finalMessage.lines.map((line) => `<p>${line}</p>`).join("")}
         </div>
       </section>
     </main>
 
-    <button class="floating-music" type="button" data-floating-music aria-label="Reproducir musica">
+    <button class="floating-music" type="button" data-floating-music data-music-toggle aria-label="Reproducir música">
       ${icons.play}
     </button>
     <audio preload="auto" autoplay data-audio src="${config.music.src}"></audio>
@@ -400,18 +413,20 @@ function escapeIcs(value) {
 
 function setupMusic() {
   const audio = document.querySelector("[data-audio]");
-  const toggle = document.querySelector("[data-floating-music]");
+  const toggles = document.querySelectorAll("[data-music-toggle]");
 
-  if (!audio || !toggle || !config.music.src) {
-    toggle?.remove();
+  if (!audio || !toggles.length || !config.music.src) {
+    toggles.forEach((toggle) => toggle.remove());
     audio?.remove();
     return;
   }
 
   function renderState(isPlaying) {
-    toggle.innerHTML = isPlaying ? icons.pause : icons.play;
-    toggle.classList.toggle("is-playing", isPlaying);
-    toggle.setAttribute("aria-label", isPlaying ? "Pausar musica" : "Reproducir musica");
+    toggles.forEach((toggle) => {
+      toggle.innerHTML = isPlaying ? icons.pause : icons.play;
+      toggle.classList.toggle("is-playing", isPlaying);
+      toggle.setAttribute("aria-label", isPlaying ? "Pausar música" : "Reproducir música");
+    });
   }
 
   async function startMusic() {
@@ -432,7 +447,7 @@ function setupMusic() {
   }
 
   function startOnFirstInteraction(event) {
-    if (event.target instanceof Element && event.target.closest("[data-floating-music]")) return;
+    if (event.target instanceof Element && event.target.closest("[data-music-toggle]")) return;
     startMusic();
   }
 
@@ -446,12 +461,14 @@ function setupMusic() {
     document.removeEventListener("keydown", startOnFirstInteraction);
   }
 
-  toggle.addEventListener("click", () => {
-    if (audio.paused) {
-      startMusic();
-    } else {
-      pauseMusic();
-    }
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      if (audio.paused) {
+        startMusic();
+      } else {
+        pauseMusic();
+      }
+    });
   });
 
   audio.addEventListener("play", () => renderState(true));
