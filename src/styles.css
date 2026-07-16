@@ -769,13 +769,6 @@ svg {
   margin-bottom: 12px;
 }
 
-.final-illustration {
-  width: min(180px, 72%);
-  margin: 0 auto 16px;
-  mix-blend-mode: multiply;
-  opacity: 0.9;
-}
-
 .final-card p:last-child {
   margin-bottom: 0;
 }

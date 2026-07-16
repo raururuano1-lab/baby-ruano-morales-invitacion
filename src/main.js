@@ -236,7 +236,6 @@ function render() {
 
       <section class="final-section section-reveal">
         <div class="paper-card final-card">
-          <img class="final-illustration" src="${assets.heroBears}" alt="" aria-hidden="true" />
           ${finalMessage.lines.map((line) => `<p>${line}</p>`).join("")}
         </div>
       </section>
