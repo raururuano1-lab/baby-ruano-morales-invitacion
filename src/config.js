@@ -3,7 +3,6 @@ const heroBears = new URL(
   "../assets/images/watercolor-bears-balloons.png",
   import.meta.url
 ).href;
-const galleryUltrasound = new URL("../assets/gallery/ecografia.svg", import.meta.url).href;
 const galleryFamily = [
   new URL("../assets/gallery/familia 1.jpeg", import.meta.url).href,
   new URL("../assets/gallery/familia 2.jpeg", import.meta.url).href,
@@ -107,12 +106,6 @@ export const invitationConfig = {
   },
 
   gallery: [
-    {
-      title: "Ecografía",
-      description: "Un primer vistazo lleno de amor.",
-      src: galleryUltrasound,
-      alt: "Placeholder elegante para foto de ecografía"
-    },
     {
       title: "Familia",
       description: "El amor que ya espera al bebé.",

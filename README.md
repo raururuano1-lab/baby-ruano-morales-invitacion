@@ -38,7 +38,7 @@ La configuracion principal esta en `src/config.js`:
 
 - Imagen principal: `assets/images/watercolor-bears-balloons.png`
 - Prediccion: `assets/images/prediction-girl-clean.png` y `assets/images/prediction-boy-clean.png`
-- Galeria: `assets/gallery/ecografia.svg` y `assets/gallery/familia 1.jpeg` a `assets/gallery/familia 6.jpeg`
+- Galeria: `assets/gallery/familia 1.jpeg` a `assets/gallery/familia 6.jpeg`
 - Musica: `assets/music/1-01 Dearly Beloved.mp3`
 
 Si cambias nombres de archivos, actualiza los `new URL(...)` al inicio de `src/config.js`.
