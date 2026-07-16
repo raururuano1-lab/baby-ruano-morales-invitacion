@@ -41,7 +41,7 @@ function toKebabCase(value) {
 }
 
 function render() {
-  const { event, assets, dressCode, gifts, gallery, finalMessage, music } = config;
+  const { event, assets, dressCode, gifts, gallery, finalMessage } = config;
 
   app.innerHTML = `
     <main class="invite-shell" id="inicio">
@@ -49,7 +49,6 @@ function render() {
         <div class="floating-cloud cloud-one"></div>
         <div class="floating-cloud cloud-two"></div>
         <div class="floating-balloon balloon-one"></div>
-        <div class="floating-balloon balloon-two"></div>
         <span class="floating-moon" aria-hidden="true">${icons.moon}</span>
 
         <p class="eyebrow">${event.coverTitle}</p>
@@ -144,18 +143,6 @@ function render() {
             .join("")}
         </div>
         <p class="countdown-note" data-countdown-note></p>
-      </section>
-
-      <section class="paper-card section-reveal music-card" aria-labelledby="music-title">
-        <div>
-          <p class="section-kicker">MÚSICA</p>
-          <p id="music-title" class="music-track">
-            ${music.src ? music.title || "Música de fondo" : music.unavailableMessage}
-          </p>
-        </div>
-        <button class="music-inline-button" type="button" data-music-toggle aria-label="Reproducir música">
-          ${icons.play}
-        </button>
       </section>
 
       <section class="paper-card section-reveal prediction-section" aria-labelledby="prediction-title">

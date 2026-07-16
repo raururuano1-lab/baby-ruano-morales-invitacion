@@ -225,13 +225,6 @@ h3 {
   right: 18%;
 }
 
-.balloon-two {
-  bottom: 20%;
-  left: 10%;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), var(--pastel-blue));
-  animation-delay: 1.4s;
-}
-
 .paper-card {
   position: relative;
   z-index: 1;
@@ -441,46 +434,6 @@ svg {
   font-size: 0.82rem;
 }
 
-.music-card {
-  display: grid;
-  grid-template-columns: 1fr 58px;
-  gap: 16px;
-  align-items: center;
-}
-
-.music-card .section-kicker {
-  margin-bottom: 8px;
-}
-
-.music-track {
-  margin: 0;
-  color: var(--coffee-text);
-  font-size: 0.98rem;
-  font-weight: 700;
-}
-
-.music-inline-button {
-  display: grid;
-  width: 58px;
-  height: 58px;
-  place-items: center;
-  border: 1px solid rgba(111, 78, 55, 0.14);
-  border-radius: 50%;
-  background: var(--coffee-text);
-  color: var(--white);
-  cursor: pointer;
-  box-shadow: var(--fine-shadow);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
-}
-
-.music-inline-button:hover,
-.music-inline-button.is-playing {
-  background: var(--taupe);
-}
-
 .prediction-section {
   text-align: center;
 }
@@ -520,7 +473,6 @@ svg {
   aspect-ratio: 1;
   border-radius: 8px;
   object-fit: contain;
-  mix-blend-mode: multiply;
   filter: drop-shadow(0 10px 14px rgba(111, 78, 55, 0.08));
 }
 
